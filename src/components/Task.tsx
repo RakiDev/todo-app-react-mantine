@@ -24,42 +24,72 @@ const Task: FC<TaskInterface> = ({ id, value, deleteTask, modifyTask }) => {
         modifyTask(id, fieldValue);
     }
     return (
-        <Paper key={id}>
-            <Accordion>
-                <Accordion.Item value="flexibility">
-                    <Accordion.Control>
-                        <Textarea
-                            value={fieldValue}
-                            onChange={handleChange}
-                            disabled={isDisabled}
-                            size='md'
-                        />
-                    </Accordion.Control>
-                    <Accordion.Panel>
-                        <Center>
-                            <Button style={{ width: '30%', margin: '1%'}}
-                                onClick={() => { handleSave(); setIsDisabled(true)}}
-                            >
-                                <AiFillSave />
-                            </Button>
-                            <Button
-                                onClick={() => { setIsDisabled(false) }}
-                                style={{ width: '30%', margin: '1%'}}
-                            >
-                                <TbEdit />
-                            </Button>
-                            <Button
-                                onClick={() => deleteTask(id) }
-                                style={{ width: '30%', margin: '1%'}}
-                            >
-                                <BsTrash />
-                            </Button>
-                        </Center>
-                    </Accordion.Panel>
-                </Accordion.Item>
-            </Accordion>
+        <Paper 
+            key={id}
+            style={{ padding: '5%', marginBottom: '5%'}}
+        >
+            <Textarea
+                value={fieldValue}
+                onChange={handleChange}
+                disabled={isDisabled}
+                size='md'
+            />
+            <Center style={{ marginTop: '5%'}}>
+                <Button style={{ width: '30%', margin: '1%'}}
+                    onClick={() => { handleSave(); setIsDisabled(true)}}
+                >
+                    <AiFillSave />
+                </Button>
+                <Button
+                    onClick={() => { setIsDisabled(false) }}
+                    style={{ width: '30%', margin: '1%'}}
+                >
+                    <TbEdit />
+                </Button>
+                <Button
+                    onClick={() => deleteTask(id) }
+                    style={{ width: '30%', margin: '1%'}}
+                >
+                    <BsTrash />
+                </Button>
+            </Center>
+
         </Paper>
     );
 }
+
+{/* <Accordion>
+<Accordion.Item value="flexibility">
+    <Accordion.Control>
+        <Textarea
+            value={fieldValue}
+            onChange={handleChange}
+            disabled={isDisabled}
+            size='md'
+        />
+    </Accordion.Control>
+    <Accordion.Panel>
+        <Center>
+            <Button style={{ width: '30%', margin: '1%'}}
+                onClick={() => { handleSave(); setIsDisabled(true)}}
+            >
+                <AiFillSave />
+            </Button>
+            <Button
+                onClick={() => { setIsDisabled(false) }}
+                style={{ width: '30%', margin: '1%'}}
+            >
+                <TbEdit />
+            </Button>
+            <Button
+                onClick={() => deleteTask(id) }
+                style={{ width: '30%', margin: '1%'}}
+            >
+                <BsTrash />
+            </Button>
+        </Center>
+    </Accordion.Panel>
+</Accordion.Item>
+</Accordion> */}
 
 export default Task;

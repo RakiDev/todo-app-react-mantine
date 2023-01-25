@@ -56,7 +56,7 @@ function App() {
                 />
             </MediaQuery>
             <Container>
-              <Text style={{ fontWeight: 'bold'}}>Application header</Text>
+              <Text style={{ fontWeight: 'bold' }}>TODO Simple</Text>
             </Container>
             <Space h="md" />
             <DarkModeButton />
