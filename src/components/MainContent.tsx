@@ -1,4 +1,4 @@
-import { Button, Center, List, Paper, Space, TextInput } from "@mantine/core";
+import { Button, Center, List, Paper, Space, Textarea, TextInput } from "@mantine/core";
 import { FC, useEffect, useState } from "react";
 import Task from "./Task";
 
@@ -25,7 +25,7 @@ const MainContent: FC = () => {
         localStorage.setItem('taskItems', JSON.stringify(taskList))
     }, [taskList]);
 
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>): void {
+    function handleChange(e: React.ChangeEvent<HTMLTextAreaElement>): void {
         const newValue = e.target.value;
         setTask(newValue);
     }
@@ -46,11 +46,14 @@ const MainContent: FC = () => {
 
     return (<>
         <Paper shadow="xs" style={{ padding: '5%' }}>
-            <TextInput
+            <Textarea
                 placeholder="New task"
                 label="Task"
                 value={task}
                 onChange={handleChange}
+                minRows={1}
+                autosize
+                spellCheck={false}
             />
             <Space h="md" />
             <Center>
