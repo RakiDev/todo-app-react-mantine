@@ -15,7 +15,6 @@ const Task: FC<TaskInterface> = ({ id, value, deleteTask, modifyTask }) => {
 
     useEffect(() => {
         modifyTask(id, fieldValue);
-        console.log(localStorage)
     }, [fieldValue]);
 
     return (
