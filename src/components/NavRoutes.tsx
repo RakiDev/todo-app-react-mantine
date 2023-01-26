@@ -34,7 +34,7 @@ const data: NavData = [
 
 
 const NavRoutes: FC = () => {
-    const [active, setActive] = useState(0);
+    const [active, setActive] = useState<number>(0);
     
     const items = data.map((item, index) => 
         <NavLink
