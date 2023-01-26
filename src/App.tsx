@@ -3,26 +3,29 @@ import {
   AppShell,
   Navbar,
   Header,
-  Footer,
   Aside,
   Text,
   MediaQuery,
   Burger,
   useMantineTheme,
-  Center,
   Container,
-  BackgroundImage,
-  Box,
-  Code,
   Space,
 } from '@mantine/core';
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Routes
+} from 'react-router-dom'
 import MainContent from './components/MainContent';
 import DarkModeButton from './components/DarkModeButton';
+import NavRoutes from './components/NavRoutes';
 
 function App() {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   return (
+    <Router>
     <AppShell
       styles={{
         main: {
@@ -33,7 +36,7 @@ function App() {
       asideOffsetBreakpoint="sm"
       navbar={
         <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
-          <Text>Application navbar</Text>
+          <NavRoutes/>
         </Navbar>
       }
       aside={
@@ -64,8 +67,13 @@ function App() {
         </Header>
       }
     >
-      <MainContent />
+      <Routes>
+        <Route path='/' element={<MainContent />}/>
+        <Route path='/settings'/>
+        <Route path='/info'/>
+      </Routes>
     </AppShell>
+    </Router>
   );
 }
 
