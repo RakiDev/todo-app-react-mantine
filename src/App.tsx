@@ -20,6 +20,7 @@ import {
 import MainContent from './components/MainContent';
 import DarkModeButton from './components/DarkModeButton';
 import NavRoutes from './components/NavRoutes';
+import Settings from './components/Settings';
 
 function App() {
   const theme = useMantineTheme();
@@ -38,13 +39,6 @@ function App() {
         <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
           <NavRoutes/>
         </Navbar>
-      }
-      aside={
-        <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
-          <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
-            <Text>Application sidebar</Text>
-          </Aside>
-        </MediaQuery>
       }
       header={
         <Header style={{ textAlign: 'center' }} height={{ base: 50, md: 70 }} p="md">
@@ -69,7 +63,7 @@ function App() {
     >
       <Routes>
         <Route path='/' element={<MainContent />}/>
-        <Route path='/settings'/>
+        <Route path='/settings' element={<Settings />}/>
         <Route path='/info'/>
       </Routes>
     </AppShell>
