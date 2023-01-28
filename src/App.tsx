@@ -10,6 +10,7 @@ import {
   useMantineTheme,
   Container,
   Space,
+  BackgroundImage
 } from '@mantine/core';
 import {
   BrowserRouter as Router,
@@ -21,17 +22,23 @@ import MainContent from './components/MainContent';
 import DarkModeButton from './components/DarkModeButton';
 import NavRoutes from './components/NavRoutes';
 import Settings from './components/Settings';
+import { usePersistentState } from './customHooks/usePersistentState';
 
 function App() {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+  const [fileURL, setFileURL] = usePersistentState<string | null>("backgroundImage");
+
   return (
     <Router>
     <AppShell
       styles={{
         main: {
           background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+          backgroundImage: fileURL === null ? '' : fileURL
         },
+        root: {
+        }
       }}
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
@@ -62,8 +69,12 @@ function App() {
       }
     >
       <Routes>
-        <Route path='/' element={<MainContent />}/>
-        <Route path='/settings' element={<Settings />}/>
+        <Route path='/' element={
+          <BackgroundImage src={fileURL === null ? '' : fileURL}>
+            <MainContent />
+          </BackgroundImage>
+        }/>
+        <Route path='/settings' element={<Settings setFileURL={setFileURL} fileURL={fileURL} />}/>
         <Route path='/info'/>
       </Routes>
     </AppShell>
