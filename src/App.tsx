@@ -35,10 +35,7 @@ function App() {
       styles={{
         main: {
           background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
-          backgroundImage: fileURL === null ? '' : fileURL
         },
-        root: {
-        }
       }}
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
@@ -70,8 +67,10 @@ function App() {
     >
       <Routes>
         <Route path='/' element={
-          <BackgroundImage src={fileURL === null ? '' : fileURL}>
-            <MainContent />
+          <BackgroundImage src={fileURL === null ? '' : fileURL} style={{ backgroundAttachment: 'fixed', backgroundRepeat: 'no-repeat' }}>
+            <div style={{width: '100%'}}>
+              <MainContent />
+            </div>
           </BackgroundImage>
         }/>
         <Route path='/settings' element={<Settings setFileURL={setFileURL} fileURL={fileURL} />}/>

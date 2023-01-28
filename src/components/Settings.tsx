@@ -1,5 +1,6 @@
-import { BackgroundImage, Button, ColorInput, Divider, FileInput, Paper, Space } from "@mantine/core";
+import { BackgroundImage, Button, ColorInput, Divider, FileInput, Paper, Space, Title } from "@mantine/core";
 import { FC, useState } from "react";
+import MainContentPreview from "./MainContentPreview";
 
 interface SettingsInterface { 
   setFileURL: React.Dispatch<React.SetStateAction<string | null>>
@@ -38,18 +39,20 @@ const Settings: FC<SettingsInterface> = ({ setFileURL, fileURL}) => {
                 accept="image/png,image/jpeg"
             />
             <Space h="sm" />
-            <Button onClick={() => console.log(fileURL)}>
+            <Button onClick={() => setFileURL('')}>
                 Remove background image
             </Button>
             <Space h="md" />
             <ColorInput value={color} onChange={setColor} label="Or a color!"/>
             <Space h="sm" />
-            <Button>
+            <Button onClick={() => setColor('')}>
                 Remove background color
             </Button>
-            <BackgroundImage src={fileURL === null ? '' : fileURL}>
-                <div style={{ height: 400 }}></div>
-            </BackgroundImage>
+            <Space h="sm" />
+            <MainContentPreview 
+              fileURL={fileURL === null ? '' : fileURL}
+              color={color}
+            />
         </div>
     );
 }
