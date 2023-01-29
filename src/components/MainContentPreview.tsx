@@ -50,6 +50,7 @@ const MainContentPreview: FC<MainContentPreviewInterface> = ({ fileURL, color })
                             <Center style={{ marginTop: '5%' }}>
                                 <Button
                                     style={{ width: '90%', margin: '1%' }}
+                                    color='red'
                                 >
                                     <BsTrash />
                                 </Button>
