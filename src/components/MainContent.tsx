@@ -1,6 +1,8 @@
-import { Button, Center, Group, MediaQuery, Paper, Space, Textarea } from "@mantine/core";
+import { Button, Center, Container, Group, MediaQuery, Modal, Paper, Space, Textarea } from "@mantine/core";
 import { nanoid } from "nanoid";
 import { FC, useEffect, useState } from "react";
+import { BsFillTrashFill } from 'react-icons/bs';
+import { AiFillWarning } from 'react-icons/ai';
 import Task from "./Task";
 
 const getTaskItems = (): string[] | [] => {
@@ -19,6 +21,7 @@ function arrCopy(prevTaskList: string[], id: number, mod: string): string[] {
 const MainContent: FC = () => {
     const [task, setTask] = useState<string>("");
     const [taskList, setTaskList] = useState<string[]>(getTaskItems);
+    const [opened, setOpened] = useState(false);
 
     useEffect(() => {
         localStorage.setItem('taskItems', JSON.stringify(taskList))
@@ -67,16 +70,46 @@ const MainContent: FC = () => {
             <Space h="md" />
             <Center>
                 <Button
-                    style={{ width: "90%" }}
+                    style={{ width: "70%" }}
                     onClick={() => addTask()}
                 >
                     Add task
+                </Button>
+                <Button
+                    color='red'
+                    style={{ width: '30%', marginLeft: '2%' }}
+                    onClick={() => setOpened(true)}
+                >
+                    <BsFillTrashFill />
+
+                    <Modal
+                        opened={opened}
+                        onClose={() => setOpened(false)}
+                        title={<><AiFillWarning color='red' /> Are you sure you want to delete all tasks?</>}
+                    >
+                    <Container>
+                        <Button
+                            color='green'
+                            style={{ width: '45%', marginRight: '2%' }}
+                            onClick={() => { setOpened(false); setTaskList([])}}
+                        >
+                            Yes
+                        </Button>
+                        <Button
+                            color='red'
+                            style={{ width: '45%' }}
+                            onClick={() => setOpened(false)}
+                        >
+                            No
+                        </Button>
+                    </Container>
+                    </Modal>
                 </Button>
             </Center>
         </Paper>
         <Space h="md" />
         <MediaQuery largerThan='sm' styles={{ display: 'none' }}>
-            <ul style={{ margin: 0, padding: 0}}>
+            <ul style={{ margin: 0, padding: 0 }}>
                 {taskList.map((value, index) => {
                     return (
                         <li key={nanoid(10)} style={{ listStyle: 'none' }}>
@@ -91,8 +124,8 @@ const MainContent: FC = () => {
                 })}
             </ul>
         </MediaQuery>
-        <MediaQuery smallerThan='sm' styles={{ display: 'none'}}>
-            <ul style={{ margin: 0, padding: 0}}>
+        <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
+            <ul style={{ margin: 0, padding: 0 }}>
                 <Group>
                     {taskList.map((value, index) => {
                         return (
@@ -107,7 +140,7 @@ const MainContent: FC = () => {
                         );
                     })}
                 </Group>
-            </ul>  
+            </ul>
         </MediaQuery>
     </div>
     );
