@@ -17,6 +17,7 @@ import NavRoutes from './components/NavRoutes';
 import Settings from './components/Settings';
 import { usePersistentState } from './customHooks/usePersistentState';
 import MainHeader from './components/MainHeader';
+import Info from './components/Info';
 
 function App() {
   const theme = useMantineTheme();
