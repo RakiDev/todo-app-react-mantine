@@ -3,6 +3,7 @@ import { nanoid } from "nanoid";
 import { FC, useEffect, useState } from "react";
 import { BsFillTrashFill } from 'react-icons/bs';
 import { AiFillWarning } from 'react-icons/ai';
+import { showNotification } from '@mantine/notifications';
 import Task from "./Task";
 
 const getTaskItems = (): string[] | [] => {
@@ -16,6 +17,19 @@ function arrCopy(prevTaskList: string[], id: number, mod: string): string[] {
     const newTaskList = [...prevTaskList];
     newTaskList[id] = mod;
     return newTaskList;
+}
+
+const notifications = {
+    addedTask: {
+        color: 'green',
+        title: 'Success!',
+        message: 'Added task successfully'
+    },
+    allTasksDeleted: {
+        color: 'green',
+        title: 'Success!',
+        message: 'All tasks deleted successfully'
+    }
 }
 
 const MainContent: FC = () => {
@@ -36,6 +50,7 @@ const MainContent: FC = () => {
         if (task.length === 0 || task === '') return;
         setTaskList((prevTaskItems) => [...prevTaskItems, task]);
         setTask("");
+        showNotification(notifications.addedTask);
     }
 
     function deleteTask(id: number): void {
@@ -91,7 +106,11 @@ const MainContent: FC = () => {
                         <Button
                             color='green'
                             style={{ width: '45%', marginRight: '2%' }}
-                            onClick={() => { setOpened(false); setTaskList([])}}
+                            onClick={() => {
+                                setOpened(false);
+                                setTaskList([]);
+                                showNotification(notifications.allTasksDeleted)
+                            }}
                         >
                             Yes
                         </Button>
