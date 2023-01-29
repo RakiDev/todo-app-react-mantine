@@ -43,7 +43,13 @@ const MainContent: FC = () => {
 
     function modifyTask(id: number, mod: string): void {
         setTaskList(arrCopy(taskList, id, mod));
-        console.log(taskList);
+    }
+
+    function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+        if (e.key !== 'Enter') return;
+        // Prevent from making a new line when pressing enter
+        e.preventDefault();
+        addTask();
     }
 
     return (<div>
@@ -56,6 +62,7 @@ const MainContent: FC = () => {
                 minRows={1}
                 autosize
                 spellCheck={false}
+                onKeyDown={handleKeyDown}
             />
             <Space h="md" />
             <Center>

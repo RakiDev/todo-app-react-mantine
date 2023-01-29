@@ -12,12 +12,11 @@ const Settings: FC<SettingsInterface> = ({ setFileURL, fileURL}) => {
 
     const fr = new FileReader();
     fr.onload = function (event) {
-      console.log(event, fr.result);
       if(typeof fr.result !== "string") throw new Error("FileReader$readAsDataURL did not generate a string");
       setFileURL(fr.result);
     };
     fr.onabort = () => console.log("aborted"); // no need to handle this
-    fr.onerror = () => console.log("errored"); // you should really handle this
+    fr.onerror = () => console.log("errored"); // should really handle this
 
     async function handleImageChange(payload: File | null): Promise<void> {
       if (payload === null) {
