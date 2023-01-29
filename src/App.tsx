@@ -55,7 +55,7 @@ function App() {
           </BackgroundImage>
         }/>
         <Route path='/settings' element={<Settings setFileURL={setFileURL} fileURL={fileURL} />}/>
-        <Route path='/info'/>
+        <Route path='/info' element={<Info />}/>
       </Routes>
     </AppShell>
     </Router>
