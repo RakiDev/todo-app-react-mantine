@@ -1,4 +1,5 @@
-import { Button, Center, List, Paper, Space, Textarea, TextInput } from "@mantine/core";
+import { Button, Center, Paper, Space, Textarea } from "@mantine/core";
+import { nanoid } from "nanoid";
 import { FC, useEffect, useState } from "react";
 import Task from "./Task";
 
@@ -9,12 +10,10 @@ const getTaskItems = (): string[] | [] => {
 }
 
 // Deep copy array
-const arrCopy = (array: string[], replaceIndex: number, replaceValue: string): string[] => {
-    const newArray = array.map((val, i) => {
-        if (i === replaceIndex) return replaceValue;
-        return val;
-    });
-    return newArray;
+function arrCopy(prevTaskList: string[], id: number, mod: string): string[] {
+    const newTaskList = [...prevTaskList];
+    newTaskList[id] = mod;
+    return newTaskList;
 }
 
 const MainContent: FC = () => {
@@ -37,14 +36,17 @@ const MainContent: FC = () => {
     }
 
     function deleteTask(id: number): void {
-        setTaskList((prevTaskItems) => prevTaskItems.filter((value, index) => index !== id));
+        setTaskList((prevTaskItems) => {
+            return prevTaskItems.filter((value, index) => index !== id);
+        });
     }
 
     function modifyTask(id: number, mod: string): void {
-        setTaskList((prevTaskList) => arrCopy(prevTaskList, id, mod));
+        setTaskList(arrCopy(taskList, id, mod));
+        console.log(taskList);
     }
 
-    return (<div style={{ height: '100vh' }}>
+    return (<div>
         <Paper shadow="xs" style={{ padding: '5%' }}>
             <Textarea
                 placeholder="New task"
@@ -66,20 +68,20 @@ const MainContent: FC = () => {
             </Center>
         </Paper>
         <Space h="md" />
-        <List>
+        <ul>
             {taskList.map((value, index) => {
                 return (
-                    <List key={index}>
+                    <li key={nanoid(10)}>
                         <Task
                             id={index}
                             value={value}
                             deleteTask={deleteTask}
                             modifyTask={modifyTask}
                         />
-                    </List>
+                    </li>
                 );
             })}
-        </List>
+        </ul>
     </div>
     );
 }

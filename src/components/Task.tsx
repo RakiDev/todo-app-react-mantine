@@ -14,12 +14,11 @@ const Task: FC<TaskInterface> = ({ id, value, deleteTask, modifyTask }) => {
     const [fieldValue, setFieldValue] = useDebouncedState<string>(value, 200);
 
     useEffect(() => {
-        modifyTask(id, fieldValue);
-    }, [fieldValue]);
+        if(fieldValue !== value) modifyTask(id, fieldValue);
+    }, [id, fieldValue]);
 
     return (
         <Paper 
-            key={id}
             style={{ padding: '5%', marginBottom: '5%'}}
         >
             <Textarea
