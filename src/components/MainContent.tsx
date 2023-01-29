@@ -1,4 +1,4 @@
-import { Button, Center, Paper, Space, Textarea } from "@mantine/core";
+import { Button, Center, Group, MediaQuery, Paper, Space, Textarea } from "@mantine/core";
 import { nanoid } from "nanoid";
 import { FC, useEffect, useState } from "react";
 import Task from "./Task";
@@ -68,20 +68,40 @@ const MainContent: FC = () => {
             </Center>
         </Paper>
         <Space h="md" />
-        <ul>
-            {taskList.map((value, index) => {
-                return (
-                    <li key={nanoid(10)}>
-                        <Task
-                            id={index}
-                            value={value}
-                            deleteTask={deleteTask}
-                            modifyTask={modifyTask}
-                        />
-                    </li>
-                );
-            })}
-        </ul>
+        <MediaQuery largerThan='sm' styles={{ display: 'none' }}>
+            <ul style={{ margin: 0, padding: 0}}>
+                {taskList.map((value, index) => {
+                    return (
+                        <li key={nanoid(10)} style={{ listStyle: 'none' }}>
+                            <Task
+                                id={index}
+                                value={value}
+                                deleteTask={deleteTask}
+                                modifyTask={modifyTask}
+                            />
+                        </li>
+                    );
+                })}
+            </ul>
+        </MediaQuery>
+        <MediaQuery smallerThan='sm' styles={{ display: 'none'}}>
+            <ul style={{ margin: 0, padding: 0}}>
+                <Group>
+                    {taskList.map((value, index) => {
+                        return (
+                            <li key={nanoid(10)} style={{ listStyle: 'none', margin: 10 }}>
+                                <Task
+                                    id={index}
+                                    value={value}
+                                    deleteTask={deleteTask}
+                                    modifyTask={modifyTask}
+                                />
+                            </li>
+                        );
+                    })}
+                </Group>
+            </ul>  
+        </MediaQuery>
     </div>
     );
 }
