@@ -31,6 +31,7 @@ const Task: FC<TaskInterface> = ({ id, value, deleteTask, modifyTask }) => {
             />
             <Center style={{ marginTop: '5%'}}>
                 <Button
+                    color='red'
                     onClick={() => deleteTask(id) }
                     style={{ width: '90%', margin: '1%'}}
                 >
