@@ -14,10 +14,10 @@ const Info: FC = () => {
         </Paper>
         <Divider my="md" label="Contact" labelPosition="center"  style={{ fontWeight: 'bolder'}}/>
         <Flex align='center' justify='center'>
-            <Button leftIcon={<AiFillGithub/>} style={{ backgroundColor: '#0d1117', width: '40%' }}>
-                Github
+            <Button component="a" target='_blank' href="https://github.com/RakiDev" leftIcon={<AiFillGithub/>} style={{ backgroundColor: '#0d1117', width: '40%' }}>
+                GitHub
             </Button>
-            <Button leftIcon={<FaDiscord />} style={{ backgroundColor: '#5764f2', width: '40%' }}>
+            <Button component="a" target='_blank' href="https://discord.com/users/218062175636291586" leftIcon={<FaDiscord />} style={{ backgroundColor: '#5764f2', width: '40%' }}>
                 Discord
             </Button>
         </Flex>
