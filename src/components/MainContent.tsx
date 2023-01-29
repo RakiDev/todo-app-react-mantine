@@ -44,7 +44,7 @@ const MainContent: FC = () => {
         setTaskList((prevTaskList) => arrCopy(prevTaskList, id, mod));
     }
 
-    return (<>
+    return (<div style={{ height: '100vh' }}>
         <Paper shadow="xs" style={{ padding: '5%' }}>
             <Textarea
                 placeholder="New task"
@@ -80,7 +80,7 @@ const MainContent: FC = () => {
                 );
             })}
         </List>
-    </>
+    </div>
     );
 }
 
