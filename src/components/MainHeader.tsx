@@ -25,9 +25,16 @@ const MainHeader: FC<MainHeaderInterface> = ({ opened, setOpened }) => {
               })}
               />
           </MediaQuery>
-          <Container>
-            <Text style={{ fontWeight: 'bold' }}>TODO Simple</Text>
-          </Container>
+          <MediaQuery largerThan="sm" styles={{ display: 'none'}}>
+            <Container>
+              <Text style={{ fontWeight: 'bold' }}>TODO Simple</Text>
+            </Container>
+          </MediaQuery>
+          <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
+            <Container style={{ marginLeft: 0}}>
+                <Text style={{ fontWeight: 'bold' }} left='sadasdas' >TODO Simple</Text>
+            </Container>
+          </MediaQuery>
           <Space h="md" />
           <DarkModeButton />
         </div>
