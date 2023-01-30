@@ -1,13 +1,11 @@
 import { VitePWA } from 'vite-plugin-pwa';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import virtual from 'vite-plugin-virtual';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    virtual(),
     VitePWA({ 
       registerType: 'autoUpdate',
       injectRegister: 'inline',
